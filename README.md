@@ -40,7 +40,8 @@ W ramach testów laboratoryjnych wdrożyłem platformę AMP. Służy ona jako pr
 **Bezpieczny dostęp zewnętrzny (Playit.gg):**
 Aby umożliwić stabilne i bezpieczne połączenie użytkownikowi spoza sieci LAN (WAN), wykorzystałem dedykowany tunel dla protokołu Minecraft Java w usłudze Playit.gg. Pozwoliło to na bezpieczne wystawienie usługi na świat bez konieczności ponoszenia kosztów publicznego adresu IP u dostawcy internetu oraz bez ryzykownego otwierania portów na domowym routerze.
 
-<img width="1920" height="930" alt="image" src="https://github.com/user-attachments/assets/493ea3bd-fac8-4dc2-b7b5-a093dd7fd74" />
+<img width="1920" height="930" alt="image" src="https://github.com/user-attachments/assets/61765d12-2418-459b-b34c-256609b08b3f" />
+
 
 ---
 
