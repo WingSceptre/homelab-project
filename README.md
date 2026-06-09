@@ -4,6 +4,17 @@ Projekt domowego laboratorium (Homelab) opartego na systemie Debian Linux. Środ
 
 ---
 
+## 📌 Spis treści
+- [🛠️ Architektura i Technologie](#architektura-i-technologie)
+- [📊 Dashboardy i Usługi](#dashboardy-i-usługi)
+  - [🐳 Panel Portainer (Docker)](#panel-portainer-docker)
+  - [🎮 Panel AMP (Serwery Gier)](#panel-amp-serwery-gier)
+  - [🛡️ Pi-hole (Serwer DNS)](#pi-hole-serwer-dns)
+- [📂 Repozytorium Konfiguracji](#repozytorium-konfiguracji)
+- [🗺️ Schemat Tekstowy ASCII](#schemat-tekstowy-ascii)
+
+---
+
 ## 🛠️ Architektura i Technologie
 
 - **System Operacyjny:** Debian Linux (Konfiguracja hybrydowa: CLI jako baza serwerowa + GUI GNOME do celów administracyjnych)
@@ -14,11 +25,11 @@ Projekt domowego laboratorium (Homelab) opartego na systemie Debian Linux. Środ
 
 ---
 
-## 📊 Galeria i Dashboardy
+## 📊 Dashboardy i Usługi
 
 Poniżej znajdują się zrzuty ekranu prezentujące wdrożone i w pełni działające usługi wchodzące w skład infrastruktury laboratoryjnej.
 
-### 🐳 Panel Portainer – Zarządzanie Kontenerami Docker
+### 🐳 Panel Portainer (Docker)
 
 Główny panel administracyjny wykorzystywany do wdrażania, monitorowania oraz zarządzania cyklem życia mikroserwisów. W środowisku uruchomione są stosy aplikacyjne (Stacks) realizujące zadania m.in. z zakresu lokalnego AI (Ollama), cyfryzacji dokumentów (Paperless-ngx), hostingu multimediów (Jellyfin), routingu (Nginx Proxy Manager) oraz ciągłego monitoringu statusu usług (Uptime Kuma). Wszystkie kontenery pracują w odizolowanych sieciach wirtualnych Dockera.
 
@@ -26,7 +37,7 @@ Główny panel administracyjny wykorzystywany do wdrażania, monitorowania oraz 
 
 ---
 
-### 🎮 Panel AMP (CubeCoders) – Orkiestracja Serwerów Gier
+### 🎮 Panel AMP (Serwery Gier)
 
 W ramach testów laboratoryjnych wdrożyłem platformę AMP. Służy ona jako prywatne środowisko stagingowe oraz serwer rozrywkowy, z którego korzystam wspólnie z przyjaciółmi. Projekt pozwala w praktyce testować alokację zasobów oraz stabilność usług pod zmiennym obciążeniem.
 
@@ -45,7 +56,7 @@ Aby umożliwić stabilne i bezpieczne połączenie użytkownikowi spoza sieci LA
 
 ---
 
-### 🛡️ Pi-hole – Lokalny Serwer DNS i Ochrona Sieci
+### 🛡️ Pi-hole (Serwer DNS)
 
 Wdrożyłem serwer Pi-hole działający jako lokalny serwer DNS oraz tzw. DNS Sinkhole. Narzędzie to automatycznie filtruje ruch sieciowy dla wszystkich urządzeń w sieci lokalnej oraz w sieci VPN, blokując telemetrię, zapytania śledzące oraz złośliwe domeny bezpośrednio na poziomie zapytań DNS.
 
