@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  app:
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: always
+    ports:
+      - '80:80'      # Publiczny ruch HTTP
+      - '443:443'    # Publiczny ruch HTTPS (szyfrowany SSL)
+      - '81:81'      # Panel administracyjny NPM dostępny lokalnie
+    restart: always
+    volumes:
+      - ./nginx_data:/data
+      - ./nginx_letsencrypt:/etc/letsencrypt
