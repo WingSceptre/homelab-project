@@ -66,7 +66,9 @@ W folderze `docker-compose-templates/` w tym repozytorium umieściłem oczyszczo
 
 ---
 
-## Schemat Tekstowy ASCII
+## 🗺️ Schemat Architektury Sieciowej (ASCII)
+
+Poniższy graf przedstawia logiczny podział infrastruktury laboratoryjnej na pojedyncze mikroserwisy oraz wielokontenerowe stosy aplikacyjne (Stacks). Schemat ilustruje routing zapytań WWW przez Reverse Proxy (NPM), centralną filtrację zapytań na poziomie DNS (Pi-hole) oraz izolację poszczególnych warstw bazodanowych i aplikacyjnych wewnątrz sieci wirtualnych Dockera.
 
 ```text
                                   [ INTERNET / SIEĆ LAN ]
@@ -100,13 +102,13 @@ W folderze `docker-compose-templates/` w tym repozytorium umieściłem oczyszczo
                      │ ┌─────────┐     ┌─────────┐ │                                                 │ ┌─────────┐     ┌─────────┐ │
                      │ │paperless│     │paperless│ │                                                 │ │odysseus-│     │odysseus-│ │
                      │ │ -db-1   │     │-broker-1│ │                                                 │ │chromadb1│     │searxng-1│ │
-                     │ │(MariaDB)│     │ (Redis) │ │                                                 │ │(Pt 8100)│     │(Pt 8080)│ │
+                     │ │(MariaDB)│     │ (Redis) │ │                                                 │ │ Pt 8100 │     │ Pt 8080 │ │
                      │ └─────────┘     └─────────┘ │                                                 │ └─────────┘     └─────────┘ │
                      │      ▼               ▼      │                                                 │              ▼              │
                      │ ┌─────────┐     ┌─────────┐ │                                                 │         ┌─────────┐         │
                      │ │paperless│     │paperless│ │                                                 │         │odysseus-│         │
                      │ │ -tika-1 │     │-gotenb-1│ │                                                 │         │ ntfy-1  │         │
-                     │ │  (OCR)  │     │ (Conv.) │ │                                                 │         │(Port8091│         │
+                     │ │  (OCR)  │     │ (Conv.) │ │                                                 │         │ Port8091│         │
                      │ └─────────┘     └─────────┘ │                                                 │         └─────────┘         │
                      └─────────────────────────────┘                                                 └─────────────────────────────┘
 
