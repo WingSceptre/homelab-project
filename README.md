@@ -5,17 +5,17 @@ Projekt domowego laboratorium (Homelab) opartego na systemie Debian Linux. Środ
 ---
 
 ## 📌 Spis treści
-- [🛠️ Architektura i Technologie](#architektura-i-technologie)
-- [📊 Dashboardy i Usługi](#dashboardy-i-usługi)
-  - [🐳 Panel Portainer (Docker)](#panel-portainer-docker)
-  - [🎮 Panel AMP (Serwery Gier)](#panel-amp-serwery-gier)
-  - [🛡️ Pi-hole (Serwer DNS)](#pi-hole-serwer-dns)
-- [📂 Repozytorium Konfiguracji](#repozytorium-konfiguracji)
-- [🗺️ Schemat Architektury Sieciowej (ASCII)](#schemat-architektury-sieciowej-ascii)
+- [🛠️ Architektura i Technologie](#architektura)
+- [📊 Dashboardy i Usługi](#dashboardy)
+  - [🐳 Panel Portainer (Docker)](#portainer)
+  - [🎮 Panel AMP (Serwery Gier)](#amp)
+  - [🛡️ Pi-hole (Serwer DNS)](#pihole)
+- [📂 Repozytorium Konfiguracji](#repozytorium)
+- [🗺️ Schemat Architektury Sieciowej (ASCII)](#schemat)
 
 ---
 
-## 🛠️ Architektura i Technologie
+## <a id="architektura"></a>🛠️ Architektura i Technologie
 
 - **System Operacyjny:** Debian Linux (Konfiguracja hybrydowa: CLI jako baza serwerowa + GUI GNOME do celów administracyjnych)
 - **Konteneryzacja & Orkiestracja:** Docker, Containerd oraz Docker Compose (Zarządzanie środowiskiem poprzez panel Portainer)
@@ -25,11 +25,11 @@ Projekt domowego laboratorium (Homelab) opartego na systemie Debian Linux. Środ
 
 ---
 
-## 📊 Dashboardy i Usługi
+## <a id="dashboardy"></a>📊 Dashboardy i Usługi
 
 Poniżej znajdują się zrzuty ekranu prezentujące wdrożone i w pełni działające usługi wchodzące w skład infrastruktury laboratoryjnej.
 
-### 🐳 Panel Portainer (Docker)
+### <a id="portainer"></a>🐳 Panel Portainer (Docker)
 
 Główny panel administracyjny wykorzystywany do wdrażania, monitorowania oraz zarządzania cyklem życia mikroserwisów. W środowisku uruchomione są stosy aplikacyjne (Stacks) realizujące zadania m.in. z zakresu lokalnego AI (Ollama), cyfryzacji dokumentów (Paperless-ngx), hostingu multimediów (Jellyfin), routingu (Nginx Proxy Manager) oraz ciągłego monitoringu statusu usług (Uptime Kuma). Wszystkie kontenery pracują w odizolowanych sieciach wirtualnych Dockera.
 
@@ -37,7 +37,7 @@ Główny panel administracyjny wykorzystywany do wdrażania, monitorowania oraz 
 
 ---
 
-### 🎮 Panel AMP (Serwery Gier)
+### <a id="amp"></a>🎮 Panel AMP (Serwery Gier)
 
 W ramach testów laboratoryjnych wdrożyłem platformę AMP. Służy ona jako prywatne środowisko stagingowe oraz serwer rozrywkowy, z którego korzystam wspólnie z przyjaciółmi. Projekt pozwala w praktyce testować alokację zasobów oraz stabilność usług pod zmiennym obciążeniem.
 
@@ -55,7 +55,7 @@ Aby umożliwić stabilne i bezpieczne połączenie użytkownikowi spoza sieci LA
 
 ---
 
-### 🛡️ Pi-hole (Serwer DNS)
+### <a id="pihole"></a>🛡️ Pi-hole (Serwer DNS)
 
 Wdrożyłem serwer Pi-hole działający jako lokalny serwer DNS oraz tzw. DNS Sinkhole. Narzędzie to automatycznie filtruje ruch sieciowy dla wszystkich urządzeń w sieci lokalnej oraz w sieci VPN, blokując telemetrię, zapytania śledzące oraz złośliwe domeny bezpośrednio na poziomie zapytań DNS.
 
@@ -64,19 +64,19 @@ Wdrożyłem serwer Pi-hole działający jako lokalny serwer DNS oraz tzw. DNS Si
 - **Efektywność blokowania:** Skuteczne odfiltrowanie około 6% ruchu (ponad 2 000 zablokowanych zapytań telemetrycznych i reklamowych).
 - **Zarządzanie bazą filtrów:** Integracja list blokowania obejmujących ponad 83 000 znanych domen serwujących niechciany ruch.
 
-Dzięki temu rozwiązaniu infrastruktura zyskała dodatkową warstwę bezpieczeństwa na brzegu sieci (Edge Security). Urządzenia końcowe zużywają mniej pasma sieciowego, a użytkownicy zostali skutecznie odcięci od uciążliwych reklam.
+Dzięki temu rozwiązaniu infrastruktura zyskała dodatkową warstwę bezpieczeństwa na brzegu sieci (Edge Security). Urządzenia końcowe zużywają less pasma sieciowego, a użytkownicy zostali skutecznie odcięci od uciążliwych reklam.
 
 <img width="1920" height="930" alt="Screenshot From 2026-06-09 14-43-02" src="https://github.com/user-attachments/assets/ca2efa28-3377-4d7c-84ae-e72b4d5ea86c" />
 
 ---
 
-## 📂 Repozytorium Konfiguracji
+## <a id="repozytorium"></a>📂 Repozytorium Konfiguracji
 
 W folderze `docker-compose-templates/` w tym repozytorium umieściłem oczyszczone (pozbawione wrażliwych danych, haseł i tokenów) pliki konfiguracyjne `yaml`, których używam do wdrażania moich usług w środowisku Docker.
 
 ---
 
-## 🗺️ Schemat Architektury Sieciowej (ASCII)
+## <a id="schemat"></a>🗺️ Schemat Architektury Sieciowej (ASCII)
 
 Poniższy graf przedstawia logiczny podział infrastruktury laboratoryjnej na pojedyncze mikroserwisy oraz wielokontenerowe stosy aplikacyjne (Stacks). Schemat ilustruje routing zapytań WWW przez Reverse Proxy (NPM), centralną filtrację zapytań na poziomie DNS (Pi-hole) oraz izolację poszczególnych warstw bazodanowych i aplikacyjnych wewnątrz sieci wirtualnych Dockera.
 
