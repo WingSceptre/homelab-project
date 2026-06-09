@@ -11,7 +11,7 @@ Projekt domowego laboratorium (Homelab) opartego na systemie Debian Linux. Środ
   - [🎮 Panel AMP (Serwery Gier)](#panel-amp-serwery-gier)
   - [🛡️ Pi-hole (Serwer DNS)](#pi-hole-serwer-dns)
 - [📂 Repozytorium Konfiguracji](#repozytorium-konfiguracji)
-- [🗺️ Schemat Tekstowy ASCII](#schemat-tekstowy-ascii)
+- [🗺️ Schemat Architektury Sieciowej (ASCII)](#schemat-architektury-sieciowej-ascii)
 
 ---
 
@@ -52,7 +52,6 @@ W ramach testów laboratoryjnych wdrożyłem platformę AMP. Służy ona jako pr
 Aby umożliwić stabilne i bezpieczne połączenie użytkownikowi spoza sieci LAN (WAN), wykorzystałem dedykowany tunel dla protokołu Minecraft Java w usłudze Playit.gg. Pozwoliło to na bezpieczne wystawienie usługi na świat bez konieczności ponoszenia kosztów publicznego adresu IP u dostawcy internetu oraz bez ryzykownego otwierania portów na domowym routerze.
 
 <img width="1920" height="930" alt="image" src="https://github.com/user-attachments/assets/61765d12-2418-459b-b34c-256609b08b3f" />
-
 
 ---
 
@@ -113,16 +112,12 @@ Poniższy graf przedstawia logiczny podział infrastruktury laboratoryjnej na po
                      │ ┌─────────┐     ┌─────────┐ │                                                 │ ┌─────────┐     ┌─────────┐ │
                      │ │paperless│     │paperless│ │                                                 │ │odysseus-│     │odysseus-│ │
                      │ │ -db-1   │     │-broker-1│ │                                                 │ │chromadb1│     │searxng-1│ │
-                     │ │(MariaDB)│     │ (Redis) │ │                                                 │ │ Pt 8100 │     │ Pt 8080 │ │
+                     │ │(MariaDB)│     │ (Redis) │ │                                                 │ │(Pt 8100)│     │(Pt 8080)│ │
                      │ └─────────┘     └─────────┘ │                                                 │ └─────────┘     └─────────┘ │
                      │      ▼               ▼      │                                                 │              ▼              │
                      │ ┌─────────┐     ┌─────────┐ │                                                 │         ┌─────────┐         │
                      │ │paperless│     │paperless│ │                                                 │         │odysseus-│         │
                      │ │ -tika-1 │     │-gotenb-1│ │                                                 │         │ ntfy-1  │         │
-                     │ │  (OCR)  │     │ (Conv.) │ │                                                 │         │ Port8091│         │
+                     │ │  (OCR)  │     │ (Conv.) │ │                                                 │         │(Port8091│         │
                      │ └─────────┘     └─────────┘ │                                                 │         └─────────┘         │
                      └─────────────────────────────┘                                                 └─────────────────────────────┘
-
-```
-
-
