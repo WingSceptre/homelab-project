@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "8090:80/tcp"  # Port HTTP zmieniony na 8090 z powodu konfliktu z Reverse Proxy (Nginx) na porcie 80
+    environment:
+      TZ: 'Europe/Warsaw'
+      WEBPASSWORD: 'The FitnessGram Pacer Test is a multistage aerobic capacity test' # Wrażliwe dane ukryte na potrzeby publicznego repozytorium
+      DNSMASQ_LISTENING: 'all'
+    volumes:
+      - pihole_config:/etc/pihole
+      - dnsmasq_config:/etc/dnsmasq.d
+    restart: always
+
+volumes:
+  pihole_config:
+  dnsmasq_config:
