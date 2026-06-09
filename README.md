@@ -1,34 +1,64 @@
 # Debian Homelab Infrastructure
 
-Projekt mojego domowego laboratorium (Homelab) opartego na systemie Debian Linux. Środowisko służy do hostowania usług sieciowych, automatyzacji oraz zarządzania instancjami aplikacji w bezpiecznej, odizolowanej sieci lokalnej i VPN.
+Projekt domowego laboratorium (Homelab) opartego na systemie Debian Linux. Środowisko służy do hostowania usług sieciowych, automatyzacji procesów oraz zarządzania odizolowanymi kontenerami i instancjami aplikacji w bezpiecznej sieci lokalnej oraz VPN.
 
 ---
 
-Architektura i Technologie:
+## 🛠️ Architektura i Technologie
 
-- System Operacyjny: Debian Linux (Konfiguracja Hybrydowa: GUI + CLI)
-- Konteneryzacja: Docker i Containerd (Zarządzanie przez Portainer)
-- Orkiestracja Gier i Aplikacji: AMP (CubeCoders)
-- Sieć i Bezpieczeństwo: NetBird (Mesh VPN), Playit.gg (Tunelowanie), Pi-hole (Filtrowanie DNS)
-- Dostęp zdalny: SSH, GNOME Remote Desktop
+- **System Operacyjny:** Debian Linux (Konfiguracja hybrydowa: CLI jako baza serwerowa + GUI GNOME do celów administracyjnych)
+- **Konteneryzacja & Orkiestracja:** Docker, Containerd oraz Docker Compose (Zarządzanie środowiskiem poprzez panel Portainer)
+- **Zarządzanie Serwerami Gier:** AMP (CubeCoders)
+- **Sieć i Bezpieczeństwo:** NetBird (Mesh VPN), Playit.gg (Bezpieczne tunelowanie ruchu), Pi-hole (Lokalny DNS Sinkhole)
+- **Dostęp zdalny:** Protokół SSH, GNOME Remote Desktop
 
 ---
 
-Galeria i Dashboardy:
+## 📊 Galeria i Dashboardy
 
-  Tutaj znajdują się zrzuty ekranu działających usług w moim laboratorium:
-    
-    Panel Portainer (Zarządzanie Dockerem)
-    
-      <img width="1920" height="930" alt="image" src="https://github.com/user-attachments/assets/fcab2621-fd63-40cb-a525-14aee11fea84" />
+Poniżej znajdują się zrzuty ekranu prezentujące wdrożone i w pełni działające usługi wchodzące w skład infrastruktury laboratoryjnej.
 
-    
-    Panel AMP (CubeCoders)
+### 🐳 Panel Portainer – Zarządzanie Kontenerami Docker
 
-    <img width="1920" height="930" alt="image" src="https://github.com/user-attachments/assets/493ea3bd-fac8-4dc2-b7b5-a0393dd7fd74" />
+Główny panel administracyjny wykorzystywany do wdrażania, monitorowania oraz zarządzania cyklem życia mikroserwisów. W środowisku uruchomione są stosy aplikacyjne (Stacks) realizujące zadania m.in. z zakresu lokalnego AI (Ollama), cyfryzacji dokumentów (Paperless-ngx), hostingu multimediów (Jellyfin), routingu (Nginx Proxy Manager) oraz ciągłego monitoringu statusu usług (Uptime Kuma). Wszystkie kontenery pracują w odizolowanych sieciach wirtualnych Dockera.
 
-    
-    Statystyki Pi-hole
+<img width="1920" height="930" alt="image" src="https://github.com/user-attachments/assets/fcab2621-fd63-40cb-a525-14aee11fea84" />
 
+---
 
-W folderze `docker-compose-templates/` w tym repozytorium umieściłem oczyszczone (pozbawione haseł i tokenów) pliki konfiguracyjne `yaml`, których używam do wdrażania moich usług.
+### 🎮 Panel AMP (CubeCoders) – Orkiestracja Serwerów Gier
+
+W ramach testów laboratoryjnych wdrożyłem platformę AMP. Służy ona jako prywatne środowisko stagingowe oraz serwer rozrywkowy, z którego korzystam wspólnie z przyjaciółmi. Projekt pozwala w praktyce testować alokację zasobów oraz stabilność usług pod zmiennym obciążeniem.
+
+**Specyfikacja środowiska:**
+- **Host:** System Debian 13 uruchomiony na procesorze AMD Ryzen 5 PRO 3400G z pulą 16 GB pamięci RAM.
+
+**Konfiguracja instancji:**
+- **ServerHeavyModded:** Prywatna, silnie zmodyfikowana instancja serwera Minecraft Java. Z uwagi na wymagające paczki modyfikacji, przydzieliłem jej dedykowane 8 GB pamięci RAM. Serwer utrzymuje stabilne 20/20 TPS przy jednoczesnej rozgrywce wieloosobowej, co potwierdza poprawną optymalizację środowiska uruchomieniowego Java (JVM).
+- **ServerVanillaCopper:** Instancja pomocnicza, utrzymywana w trybie offline w celu optymalizacji i oszczędzania zasobów systemowych maszyny, gdy nie jest używana.
+
+**Bezpieczny dostęp zewnętrzny (Playit.gg):**
+Aby umożliwić stabilne i bezpieczne połączenie użytkownikowi spoza sieci LAN (WAN), wykorzystałem dedykowany tunel dla protokołu Minecraft Java w usłudze Playit.gg. Pozwoliło to na bezpieczne wystawienie usługi na świat bez konieczności ponoszenia kosztów publicznego adresu IP u dostawcy internetu oraz bez ryzykownego otwierania portów na domowym routerze.
+
+<img width="1920" height="930" alt="image" src="https://github.com/user-attachments/assets/493ea3bd-fac8-4dc2-b7b5-a093dd7fd74" />
+
+---
+
+### 🛡️ Pi-hole – Lokalny Serwer DNS i Ochrona Sieci
+
+Wdrożyłem serwer Pi-hole działający jako lokalny serwer DNS oraz tzw. DNS Sinkhole. Narzędzie to automatycznie filtruje ruch sieciowy dla wszystkich urządzeń w sieci lokalnej oraz w sieci VPN, blokując telemetrię, zapytania śledzące oraz złośliwe domeny bezpośrednio na poziomie zapytań DNS.
+
+**Kluczowe parametry wdrożenia:**
+- **Wydajność sieciowa:** Przetwarzanie ponad 33 000 zapytań DNS w skali doby na potrzeby sieci domowej.
+- **Efektywność blokowania:** Skuteczne odfiltrowanie około 6% ruchu (ponad 2 000 zablokowanych zapytań telemetrycznych i reklamowych).
+- **Zarządzanie bazą filtrów:** Integracja list blokowania obejmujących ponad 83 000 znanych domen serwujących niechciany ruch.
+
+Dzięki temu rozwiązaniu infrastruktura zyskała dodatkową warstwę bezpieczeństwa na brzegu sieci (Edge Security). Urządzenia końcowe zużywają mniej pasma sieciowego, a użytkownicy zostali skutecznie odcięci od uciążliwych reklam.
+
+<img width="1920" height="930" alt="Screenshot From 2026-06-09 14-43-02" src="https://github.com/user-attachments/assets/ca2efa28-3377-4d7c-84ae-e72b4d5ea86c" />
+
+---
+
+## 📂 Repozytorium Konfiguracji
+
+W folderze `docker-compose-templates/` w tym repozytorium umieściłem oczyszczone (pozbawione wrażliwych danych, haseł i tokenów) pliki konfiguracyjne `yaml`, których używam do wdrażania moich usług w środowisku Docker.
