@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  stirling-pdf:
+    container_name: stirling-pdf
+    image: stirlingtools/stirling-pdf:latest
+    ports:
+      - "9900:8080" # Mapowanie portu aplikacji na zewnętrzny port 9900 hosta
+    environment:
+      - TZ=Europe/Warsaw
+    restart: always
